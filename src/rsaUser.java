@@ -35,7 +35,7 @@ public class rsaUser {
 		int certainty = 90;
 		BigInteger k = new BigInteger(bitLength, certainty, rnd);
 	    
-		System.out.println("This is perhaps a lousy k " + k);
+//		System.out.println("This is perhaps a lousy k " + k);
 		
 		
 		//In case k is not smaller than Q we need to generate a new one
@@ -43,40 +43,40 @@ public class rsaUser {
 			k = new BigInteger(bitLength, certainty, rnd);
 		}
 		
-		System.out.println("New k " + k);
+//		System.out.println("New k " + k);
 		
 		//K inverse right here
 		BigInteger kInv = k.modInverse(t.getQ());
-		System.out.println("k inverse "+ kInv);
+//		System.out.println("k inverse "+ kInv);
 		
 		//Getting z in decimal
 		
 		BigInteger z = new BigInteger(d, 16);
-		System.out.println("This is our z "+z);
+//		System.out.println("This is our z "+z);
 		
 		//Getting r in decimal
 		BigInteger r = t.getG().modPow(k, t.getP()).mod(t.getQ());
-		System.out.println("r= "+r);
+//		System.out.println("r= "+r);
 		
 		BigInteger xr = p.getX().multiply(r);
 		xr = xr.add(z);
 		xr = xr.multiply(kInv);
 		//Getting s
 		BigInteger s = xr.mod(t.getQ());
-		System.out.println("This is s " + s);
+//		System.out.println("This is s " + s);
 		
 		BigInteger rs[] = new BigInteger[2];
 		rs[0] = r;
 		rs[1] = s;
 		for(int i = 0; i<=1; i++){
-			System.out.println("r,s:"+ rs[i]);
+//			System.out.println("r,s:"+ rs[i]);
 		}
 		
 		return rs;
 		
 	}
 	
-	public static boolean verify(BigInteger pubKey, String d, BigInteger[] rs){
+	public boolean verify(BigInteger pubKey, String d, BigInteger[] rs){
 		
 		BigInteger rPrime = rs[0];
 		BigInteger sPrime = rs[1];
@@ -95,8 +95,8 @@ public class rsaUser {
 			
 			BigInteger v = gp.mod(t.getQ());
 			
-			System.out.println("v is " + v);
-			System.out.println("r is " + rPrime);
+//			System.out.println("v is " + v);
+//			System.out.println("r is " + rPrime);
 			
 			if(v.equals(rPrime)){
 				System.out.println("Signature valid");

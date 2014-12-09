@@ -10,7 +10,7 @@ public class keyPair {
 	
 	public keyPair(ParameterTriple t){
 		if(t.checkValues() == false){
-			System.out.println("ERROR");
+			System.out.println("Unaccepted values");
 		}
 		
 		int bitLength = 160;
@@ -18,7 +18,7 @@ public class keyPair {
 		int certainty = 90;
 		x = new BigInteger(bitLength, certainty, rnd);
 	    
-		System.out.println("This is perhaps a lousy x " + x);
+//		System.out.println("This is perhaps a lousy x " + x);
 		
 		
 		//In case x is not smaller than Q we need to generate a new one
@@ -26,13 +26,13 @@ public class keyPair {
 			x = new BigInteger(bitLength, certainty, rnd);
 		}
 		
-	    System.out.println("This is our improved x " + x);
+//	    System.out.println("This is our improved x " + x);
 		
 	    //Now we create y
 	    
 	    y = t.getG().modPow(x, t.getP());
 	    
-	    System.out.println("This is our y " + y);
+//	    System.out.println("This is our y " + y);
 		
 	}
 
@@ -51,7 +51,4 @@ public class keyPair {
 	public void setY(BigInteger y) {
 		this.y = y;
 	}
-	
-	
-
 }
